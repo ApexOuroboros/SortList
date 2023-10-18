@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class linearSearch : MonoBehaviour
+public class LinearSearch : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static int Linear(int[] inventory, int value)
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        for (int i = 0; i < inventory.Length; i++)
+        {
+
+            if (inventory[i] == value)
+            {
+               
+                return i;
+
+            }
+        }
+
+        return -1;
     }
 }
