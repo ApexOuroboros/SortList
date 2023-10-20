@@ -83,34 +83,34 @@ public class ItemManagementSystem : MonoBehaviour
     /*
     public void SortedItems()
     {
-        sortedItemList.Clear();
+        inventoryItemList.Clear();
         foreach(Item i in fullItemList)
         {
-            sortedItemList.Add(i);
+            inventoryItemList.Add(i);
         }
     }
 
     public void SortItemByName(string name)
     {
-        sortedItemList.Clear();
+        inventoryItemList.Clear();
         foreach(Item i in fullItemList)
         {
             if (i.Name == name)
             {
-                sortedItemList.Add(i);
-            }
+                inventoryItemList.Add(i);
+            }   
         }
         Debug.Log("Sorted by Name");
     }
 
     public void SortItemByWeight(float weight)
     {
-        sortedItemList.Clear();
+        inventoryItemList.Clear();
         foreach(Item i in fullItemList)
         {
             if(i.Weight == weight)
             {
-                sortedItemList.Add(i);
+                inventoryItemList.Add(i);
             }
         }
         Debug.Log("Sorted by Weight");
