@@ -13,6 +13,9 @@ public class ItemManagementSystem : MonoBehaviour
     [SerializeField]
     List<Item> inventoryItemList = new List<Item>();
 
+    //[SerializeField]
+    //List<Item> sortedItemList = new List<Item>();
+
     [SerializeField]
     GameObject itemPrefab;
 
@@ -26,6 +29,7 @@ public class ItemManagementSystem : MonoBehaviour
 
         DefineItems();
         InitialiseFullItemList();
+        //SortedItems();
 
     }
 
@@ -76,12 +80,49 @@ public class ItemManagementSystem : MonoBehaviour
         }
     }
 
+    /*
+    public void SortedItems()
+    {
+        sortedItemList.Clear();
+        foreach(Item i in fullItemList)
+        {
+            sortedItemList.Add(i);
+        }
+    }
+
+    public void SortItemByName(string name)
+    {
+        sortedItemList.Clear();
+        foreach(Item i in fullItemList)
+        {
+            if (i.Name == name)
+            {
+                sortedItemList.Add(i);
+            }
+        }
+        Debug.Log("Sorted by Name");
+    }
+
+    public void SortItemByWeight(float weight)
+    {
+        sortedItemList.Clear();
+        foreach(Item i in fullItemList)
+        {
+            if(i.Weight == weight)
+            {
+                sortedItemList.Add(i);
+            }
+        }
+        Debug.Log("Sorted by Weight");
+    }
+    */
     void ClearInventoryItemList()
     {
         foreach (Transform child in inventoryTransform)
         {
             GameObject.Destroy(child.gameObject);
         }
+        //Debug.Log("Clear");
     }
 
     void ItemClicked(int index)
