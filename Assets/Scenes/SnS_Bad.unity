@@ -1945,6 +1945,7 @@ GameObject:
   - component: {fileID: 1268595523}
   - component: {fileID: 1268595522}
   - component: {fileID: 1268595521}
+  - component: {fileID: 1268595524}
   m_Layer: 5
   m_Name: SearchBar
   m_TagString: Untagged
@@ -2120,6 +2121,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1268595519}
   m_CullTransparentMesh: 1
+--- !u!114 &1268595524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268595519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b16a68ba3cb6649bc4699016e7d96e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  searchBar: {fileID: 1268595519}
+  inventory: {fileID: 8471913185381296882, guid: d36c5bdca6572e74bab88a2f7add95d5, type: 3}
+  itemList: []
+  itemTotal: 0
+  inventoryTransform: {fileID: 428277373}
 --- !u!1 &1339116423
 GameObject:
   m_ObjectHideFlags: 0
@@ -2289,6 +2307,7 @@ MonoBehaviour:
   inventory: {fileID: 428277372}
   itemList: []
   itemTotal: 0
+  inventoryTransform: {fileID: 0}
 --- !u!1 &1447420147
 GameObject:
   m_ObjectHideFlags: 0

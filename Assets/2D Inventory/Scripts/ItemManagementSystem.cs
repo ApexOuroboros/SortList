@@ -89,6 +89,7 @@ public class ItemManagementSystem : MonoBehaviour
             inventoryItemList.Add(i);
         }
     }
+    */
 
     public void SortItemByName(string name)
     {
@@ -98,9 +99,10 @@ public class ItemManagementSystem : MonoBehaviour
             if (i.Name == name)
             {
                 inventoryItemList.Add(i);
+                Debug.Log("Sorted by Name");
             }   
         }
-        Debug.Log("Sorted by Name");
+        
     }
 
     public void SortItemByWeight(float weight)
@@ -111,18 +113,20 @@ public class ItemManagementSystem : MonoBehaviour
             if(i.Weight == weight)
             {
                 inventoryItemList.Add(i);
+                Debug.Log("Sorted by Weight");
             }
         }
-        Debug.Log("Sorted by Weight");
+        
     }
-    */
+    
     void ClearInventoryItemList()
     {
         foreach (Transform child in inventoryTransform)
         {
             GameObject.Destroy(child.gameObject);
+            //Debug.Log("Clear");
         }
-        //Debug.Log("Clear");
+        
     }
 
     void ItemClicked(int index)

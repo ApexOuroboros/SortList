@@ -18,6 +18,7 @@ public class SearchManager : MonoBehaviour
     void Start()
     {
 
+        //get all items
         itemTotal = inventory.transform.childCount;
 
         itemList = new GameObject[itemTotal];
@@ -28,25 +29,6 @@ public class SearchManager : MonoBehaviour
         }
 
     }
-
-    /*
-    public static int Linear(int[]items, int totalItems)
-    {
-
-        for (int i = 0; i < items.Length; i++)
-        {
-
-            if (items[i] == totalItems)
-            {
-
-                return i;
-
-            }
-        }
-
-        return -1;
-    }
-    */
 
     public void Search()
     {
@@ -73,6 +55,23 @@ public class SearchManager : MonoBehaviour
             }
         }
 
+    }
+
+    public static int Linear(int[] inventory, int value)
+    {
+
+        for (int i = 0; i < inventory.Length; i++)
+        {
+
+            if (inventory[i] == value)
+            {
+
+                return i;
+                
+            }
+        }
+
+        return -1;
     }
 
 }
