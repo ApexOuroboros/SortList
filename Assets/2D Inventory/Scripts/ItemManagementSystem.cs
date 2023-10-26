@@ -29,7 +29,6 @@ public class ItemManagementSystem : MonoBehaviour
 
         DefineItems();
         InitialiseFullItemList();
-        //SortedItems();
 
     }
 
@@ -80,51 +79,111 @@ public class ItemManagementSystem : MonoBehaviour
         }
     }
 
-    /*
-    public void SortedItems()
-    {
-        inventoryItemList.Clear();
-        foreach(Item i in fullItemList)
-        {
-            inventoryItemList.Add(i);
-        }
-    }
-    */
+    //bubble sort
 
-    public void SortItemByName(string name)
+    public void SortBubNameButton()
     {
-        inventoryItemList.Clear();
-        foreach(Item i in fullItemList)
-        {
-            if (i.Name == name)
-            {
-                inventoryItemList.Add(i);
-                Debug.Log("Sorted by Name");
-            }   
-        }
+        Debug.Log("start: " + Time.time * 1000);
+        inventoryItemList = BubbleName(inventoryItemList);
+        Debug.Log("end: " + Time.time * 1000);
+        InitialiseInventoryItemList();
         
     }
 
-    public void SortItemByWeight(float weight)
+    public void SortBubWeightButton()
     {
-        inventoryItemList.Clear();
-        foreach(Item i in fullItemList)
+
+        inventoryItemList = BubbleWeight(inventoryItemList);
+        InitialiseInventoryItemList();
+        
+    }
+
+    List<Item> BubbleWeight(List<Item> list)
+    {
+        int n = list.Count;
+        Item temp;
+
+        bool swapped = true;
+
+        while (swapped)
         {
-            if(i.Weight == weight)
+
+            swapped = false;
+            for (int i = 0; i < n - 1; i++)
             {
-                inventoryItemList.Add(i);
-                Debug.Log("Sorted by Weight");
+
+                if (list[i].Weight > list[i + 1].Weight)
+                {
+
+                    temp = list[i];
+                    list[i].Weight = list[i + 1].Weight;
+                    list[i + 1] = temp;
+                    swapped = true;
+
+                }
+
             }
+
         }
-        
+
+        return list;
+
     }
-    
+
+    List<Item> BubbleName(List<Item> list)
+    {
+        int n = list.Count;
+        Item temp;
+
+        bool swapped = true;
+
+        while (swapped)
+        {
+
+            swapped = false;
+            for (int i = 0; i < n - 1; i++)
+            {
+                
+                if (string.Compare(list[i].Name, list[i + 1].Name) > 0)
+                {
+
+                    temp = list[i];
+                    list[i].Name = list[i + 1].Name;
+                    list[i + 1] = temp;
+                    swapped = true;
+
+                }
+
+            }
+
+        }
+
+        return list;
+
+    }
+
+    //merge sort
+
+    public void SortMergNameButton()
+    {
+
+
+    }
+
+    public void SortMergWeightButton()
+    {
+
+
+    }
+
+
+
     void ClearInventoryItemList()
     {
         foreach (Transform child in inventoryTransform)
         {
             GameObject.Destroy(child.gameObject);
-            //Debug.Log("Clear");
+            
         }
         
     }

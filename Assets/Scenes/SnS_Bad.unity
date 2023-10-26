@@ -1894,7 +1894,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1156042510}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1900187770}
+        m_TargetAssemblyTypeName: ItemManagementSystem, Assembly-CSharp
+        m_MethodName: SortBubWeightButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1156042510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2137,7 +2149,6 @@ MonoBehaviour:
   inventory: {fileID: 8471913185381296882, guid: d36c5bdca6572e74bab88a2f7add95d5, type: 3}
   itemList: []
   itemTotal: 0
-  inventoryTransform: {fileID: 428277373}
 --- !u!1 &1339116423
 GameObject:
   m_ObjectHideFlags: 0
@@ -2220,7 +2231,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1339116426}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1900187770}
+        m_TargetAssemblyTypeName: ItemManagementSystem, Assembly-CSharp
+        m_MethodName: SortBubNameButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1339116426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2307,7 +2330,6 @@ MonoBehaviour:
   inventory: {fileID: 428277372}
   itemList: []
   itemTotal: 0
-  inventoryTransform: {fileID: 0}
 --- !u!1 &1447420147
 GameObject:
   m_ObjectHideFlags: 0
