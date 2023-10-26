@@ -265,6 +265,34 @@ public class ItemManagementSystem : MonoBehaviour
     }
     */
 
+    //linear search
+
+    public void LinButton()
+    {
+        
+        //Linear();
+
+        InitialiseInventoryItemList();
+
+    }
+
+    public static int Linear(int[] inventory, int value)
+    {
+
+        for (int i = 0; i < inventory.Length; i++)
+        {
+
+            if (inventory[i] == value)
+            {
+
+                return i;
+
+            }
+        }
+
+        return -1;
+    }
+
     void ClearInventoryItemList()
     {
         foreach (Transform child in inventoryTransform)
