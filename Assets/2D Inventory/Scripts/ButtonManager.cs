@@ -16,6 +16,6 @@ public class ButtonManager : MonoBehaviour
         {
             GameObject.Destroy(child.gameObject);
         }
-        Debug.Log("Clear");
+        
     }
 }

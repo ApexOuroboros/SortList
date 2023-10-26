@@ -1084,9 +1084,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1553984216}
-        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
-        m_MethodName: ClearInventoryItemList
+      - m_Target: {fileID: 1900187770}
+        m_TargetAssemblyTypeName: ItemManagementSystem, Assembly-CSharp
+        m_MethodName: ClearButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

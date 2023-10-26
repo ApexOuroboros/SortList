@@ -86,6 +86,7 @@ public class ItemManagementSystem : MonoBehaviour
         Debug.Log("start: " + Time.time * 1000);
         inventoryItemList = BubbleName(inventoryItemList);
         Debug.Log("end: " + Time.time * 1000);
+
         InitialiseInventoryItemList();
         
     }
@@ -116,7 +117,7 @@ public class ItemManagementSystem : MonoBehaviour
                 {
 
                     temp = list[i];
-                    list[i].Weight = list[i + 1].Weight;
+                    list[i] = list[i + 1];
                     list[i + 1] = temp;
                     swapped = true;
 
@@ -148,7 +149,7 @@ public class ItemManagementSystem : MonoBehaviour
                 {
 
                     temp = list[i];
-                    list[i].Name = list[i + 1].Name;
+                    list[i] = list[i + 1];
                     list[i + 1] = temp;
                     swapped = true;
 
@@ -164,6 +165,7 @@ public class ItemManagementSystem : MonoBehaviour
 
     //merge sort
 
+    /*
     public void SortMergNameButton()
     {
 
@@ -173,19 +175,114 @@ public class ItemManagementSystem : MonoBehaviour
     public void SortMergWeightButton()
     {
 
+        inventoryItemList = MMergeW(inventoryItemList);
 
     }
 
+    List<Item> MSortW(List<Item> unsorted)
+    {
 
+        if (unsorted.Count <= 1)
+        {
+            return unsorted;
+        }
+
+        var left = new List<Item>();
+        var right = new List<Item>();
+        int middle = unsorted.Count / 2;
+
+        for (int i = 0; i < unsorted.Count; i++)
+        {
+
+            left.Add(unsorted[i]);
+
+        }
+
+        for (int i = 0; i < unsorted.Count; i++)
+        {
+
+            right.Add(unsorted[i]);
+
+        }
+
+        left = MSortW(left);
+        right = MSortW(right);
+
+        return MMergeW(left, right);
+
+    }
+    List<Item> MMergeW(List<Item> left, List<Item> right)
+    {
+
+        var result = new List<Item>();
+
+        while (left.Count > 0 || right.Count > 0)
+        {
+
+            if (left.Count > 0 && right.Count > 0)
+            {
+
+                if (left[0].Weight > right[0].Weight)
+                {
+
+                    result.Add(left[0]);
+
+                    left.Remove(left[0]);
+
+                }
+                else
+                {
+
+                    result.Add(right[0]);
+
+                    right.Remove(right[0]);
+
+                }
+
+            }
+            else if (left.Count > 0)
+            {
+
+                result.Add(left[0]);
+
+                result.Remove(left[0]);
+
+            }
+            else if (right.Count > 0)
+            {
+
+                result.Add(right[0]);
+
+                result.Remove(right[0]);
+
+            }
+
+        }
+
+
+        return result;
+
+    }
+    */
 
     void ClearInventoryItemList()
     {
         foreach (Transform child in inventoryTransform)
         {
             GameObject.Destroy(child.gameObject);
-            
+           
         }
         
+    }
+
+    public void ClearButton()
+    {
+        foreach (Transform child in inventoryTransform)
+        {
+            GameObject.Destroy(child.gameObject);
+
+        }
+        inventoryItemList.Clear();
     }
 
     void ItemClicked(int index)
