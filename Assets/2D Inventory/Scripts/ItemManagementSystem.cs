@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,6 +23,12 @@ public class ItemManagementSystem : MonoBehaviour
     [SerializeField]
     Transform inventoryTransform;
 
+    public GameObject searchBar;
+    public GameObject[] itemList;
+    public GameObject inventory;
+
+    public int itemTotal;
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +36,7 @@ public class ItemManagementSystem : MonoBehaviour
 
         DefineItems();
         InitialiseFullItemList();
+        InitialiseLinSearch();
 
     }
 
@@ -37,6 +45,10 @@ public class ItemManagementSystem : MonoBehaviour
     {
         
     }
+
+    //********************************
+    //******** defining items ********
+    //********************************
 
     void DefineItems()
     {
@@ -79,7 +91,11 @@ public class ItemManagementSystem : MonoBehaviour
         }
     }
 
-    //bubble sort
+    //********************************
+    //******** sorting items *********
+    //********************************
+
+    //******** bubble sort ********
 
     public void SortBubNameButton()
     {
@@ -93,8 +109,10 @@ public class ItemManagementSystem : MonoBehaviour
 
     public void SortBubWeightButton()
     {
-
+        Debug.Log("start: " + Time.time * 1000);
         inventoryItemList = BubbleWeight(inventoryItemList);
+        Debug.Log("end: " + Time.time * 1000);
+
         InitialiseInventoryItemList();
         
     }
@@ -163,55 +181,66 @@ public class ItemManagementSystem : MonoBehaviour
 
     }
 
-    //merge sort
-
-    /*
-    public void SortMergNameButton()
-    {
-
-
-    }
+    //******** merge sort ********
 
     public void SortMergWeightButton()
     {
 
-        inventoryItemList = MMergeW(inventoryItemList);
+        inventoryItemList = MergeWeight(inventoryItemList);
+
+        InitialiseInventoryItemList();
 
     }
 
-    List<Item> MSortW(List<Item> unsorted)
+    private List<Item> MergeWeight(List<Item> inventoryItemList)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SortMergNameButton()
     {
 
-        if (unsorted.Count <= 1)
+        inventoryItemList = MergeName(inventoryItemList);
+
+        InitialiseInventoryItemList();
+
+    }
+
+    private List<Item> MergeName(List<Item> inventoryItemList)
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<Item> SortWeight(List<Item> unsorted)
+    {
+
+        if(unsorted.Count <= 1)
         {
             return unsorted;
         }
 
         var left = new List<Item>();
         var right = new List<Item>();
-        int middle = unsorted.Count / 2;
+        var middle = unsorted.Count / 2;
 
-        for (int i = 0; i < unsorted.Count; i++)
+        for (var i = 0; i < middle; i++)
         {
-
             left.Add(unsorted[i]);
-
         }
 
-        for (int i = 0; i < unsorted.Count; i++)
+        for (var i = 0; i < unsorted.Count; i++)
         {
-
             right.Add(unsorted[i]);
-
         }
 
-        left = MSortW(left);
-        right = MSortW(right);
+        left = SortWeight(left);
+        right = SortWeight(right);
 
-        return MMergeW(left, right);
+        return MergeWeight(left, right);
 
     }
-    List<Item> MMergeW(List<Item> left, List<Item> right)
+
+    public List<Item> MergeWeight(List<Item> left, List<Item> right)
     {
 
         var result = new List<Item>();
@@ -222,60 +251,149 @@ public class ItemManagementSystem : MonoBehaviour
             if (left.Count > 0 && right.Count > 0)
             {
 
-                if (left[0].Weight > right[0].Weight)
+                if (left[0].Weight < right[0].Weight)
                 {
-
                     result.Add(left[0]);
-
                     left.Remove(left[0]);
-
                 }
                 else
                 {
-
                     result.Add(right[0]);
-
                     right.Remove(right[0]);
-
                 }
-
             }
             else if (left.Count > 0)
             {
-
                 result.Add(left[0]);
-
                 result.Remove(left[0]);
-
             }
             else if (right.Count > 0)
             {
-
                 result.Add(right[0]);
-
                 result.Remove(right[0]);
-
             }
+        }
+        return result;
+        
+    }
 
+    public List<Item> SortName(List<Item> unsorted)
+    {
+        if (unsorted.Count <= 1)
+        {
+            return unsorted;
         }
 
+        var left = new List<Item>();
+        var right = new List<Item>();
+        var middle = unsorted.Count / 2;
 
-        return result;
+        for (var i = 0; i < middle; i++)
+        {
+            left.Add(unsorted[i]);
+        }
 
+        for (var i = 0; i < unsorted.Count; i++)
+        {
+            right.Add(unsorted[i]);
+        }
+
+        left = SortName(left);
+        right = SortName(right);
+
+        return MergeName(left, right);
     }
-    */
 
-    //linear search
+    public List<Item> MergeName(List<Item> left, List<Item> right)
+    {
+        var result = new List<Item>();
+
+        while (left.Count > 0 || right.Count > 0)
+        {
+
+            if (left.Count > 0 && right.Count > 0)
+            {
+
+                if (string.Compare(left[0].Name, left[0 + 1].Name) > 0)
+                {
+                    result.Add(left[0]);
+                    left.Remove(left[0]);
+                }
+                else
+                {
+                    result.Add(right[0]);
+                    right.Remove(right[0]);
+                }
+            }
+            else if (left.Count > 0)
+            {
+                result.Add(left[0]);
+                result.Remove(left[0]);
+            }
+            else if (right.Count > 0)
+            {
+                result.Add(right[0]);
+                result.Remove(right[0]);
+            }
+        }
+        return result;
+    }
+
+    //*********************************
+    //******** searching items ********
+    //*********************************
+
+    void InitialiseLinSearch()
+    {
+        itemTotal = inventory.transform.childCount;
+
+        itemList = new GameObject[itemTotal];
+
+        for (int i = 0; i < itemTotal; i++)
+        {
+            itemList[i] = inventory.transform.GetChild(i).gameObject;
+        }
+    }
 
     public void LinButton()
     {
         
-        //Linear();
-
         InitialiseInventoryItemList();
+
+        
+        string searchText = searchBar.GetComponent<TMP_InputField>().text;
+        int searchLength = searchText.Length;
+
+        int searchedItems = 0;
+
+        IList list = inventoryItemList;
+        for (int i1 = 0; i1 < list.Count; i1++)
+        {
+            GameObject i = (GameObject)list[i1];
+            searchedItems += 1;
+
+            if (i.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text.Length >= searchLength)
+            {
+                if (searchText.ToLower() == i.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text.Substring(0, searchLength).ToLower())
+                {
+                    i.SetActive(true);
+                }
+                else
+                {
+                    i.SetActive(false);
+                }
+            }
+        }
+        
 
     }
 
+    public void BinButton()
+    {
+
+    }
+
+    /*
     public static int Linear(int[] inventory, int value)
     {
 
@@ -292,6 +410,7 @@ public class ItemManagementSystem : MonoBehaviour
 
         return -1;
     }
+    */
 
     void ClearInventoryItemList()
     {
