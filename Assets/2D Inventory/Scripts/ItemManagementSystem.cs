@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,7 +35,7 @@ public class ItemManagementSystem : MonoBehaviour
 
         DefineItems();
         InitialiseFullItemList();
-        InitialiseLinSearch();
+        //InitialiseLinSearch();
 
     }
 
@@ -96,27 +95,7 @@ public class ItemManagementSystem : MonoBehaviour
     //********************************
 
     //******** bubble sort ********
-
-    public void SortBubNameButton()
-    {
-        Debug.Log("start: " + Time.time * 1000);
-        inventoryItemList = BubbleName(inventoryItemList);
-        Debug.Log("end: " + Time.time * 1000);
-
-        InitialiseInventoryItemList();
-        
-    }
-
-    public void SortBubWeightButton()
-    {
-        Debug.Log("start: " + Time.time * 1000);
-        inventoryItemList = BubbleWeight(inventoryItemList);
-        Debug.Log("end: " + Time.time * 1000);
-
-        InitialiseInventoryItemList();
-        
-    }
-
+    //******* bubble weight ********
     List<Item> BubbleWeight(List<Item> list)
     {
         int n = list.Count;
@@ -148,6 +127,18 @@ public class ItemManagementSystem : MonoBehaviour
         return list;
 
     }
+
+    public void SortBubWeightButton()
+    {
+        Debug.Log("start: " + Time.time * 1000);
+        inventoryItemList = BubbleWeight(inventoryItemList);
+        Debug.Log("end: " + Time.time * 1000);
+
+        InitialiseInventoryItemList();
+        
+    }
+
+    //******** bubble name ********
 
     List<Item> BubbleName(List<Item> list)
     {
@@ -181,36 +172,18 @@ public class ItemManagementSystem : MonoBehaviour
 
     }
 
+    public void SortBubNameButton()
+    {
+        Debug.Log("start: " + Time.time * 1000);
+        inventoryItemList = BubbleName(inventoryItemList);
+        Debug.Log("end: " + Time.time * 1000);
+
+        InitialiseInventoryItemList();
+        
+    }
+
     //******** merge sort ********
-
-    public void SortMergWeightButton()
-    {
-
-        inventoryItemList = MergeWeight(inventoryItemList);
-
-        InitialiseInventoryItemList();
-
-    }
-
-    private List<Item> MergeWeight(List<Item> inventoryItemList)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void SortMergNameButton()
-    {
-
-        inventoryItemList = MergeName(inventoryItemList);
-
-        InitialiseInventoryItemList();
-
-    }
-
-    private List<Item> MergeName(List<Item> inventoryItemList)
-    {
-        throw new NotImplementedException();
-    }
-
+    //******** merge weight ********
     public List<Item> SortWeight(List<Item> unsorted)
     {
 
@@ -277,6 +250,22 @@ public class ItemManagementSystem : MonoBehaviour
         
     }
 
+    public void SortMergWeightButton()
+    {
+
+        inventoryItemList = MergeWeight(inventoryItemList);
+
+        InitialiseInventoryItemList();
+
+    }
+
+    private List<Item> MergeWeight(List<Item> inventoryItemList)
+    {
+        throw new NotImplementedException();
+    }
+
+    //******** merge name ********
+
     public List<Item> SortName(List<Item> unsorted)
     {
         if (unsorted.Count <= 1)
@@ -339,10 +328,25 @@ public class ItemManagementSystem : MonoBehaviour
         return result;
     }
 
+    public void SortMergNameButton()
+    {
+
+        inventoryItemList = MergeName(inventoryItemList);
+
+        InitialiseInventoryItemList();
+
+    }
+
+    private List<Item> MergeName(List<Item> inventoryItemList)
+    {
+        throw new NotImplementedException();
+    }
+
     //*********************************
     //******** searching items ********
     //*********************************
 
+    /*
     void InitialiseLinSearch()
     {
         itemTotal = inventory.transform.childCount;
@@ -354,47 +358,10 @@ public class ItemManagementSystem : MonoBehaviour
             itemList[i] = inventory.transform.GetChild(i).gameObject;
         }
     }
+    */
 
-    public void LinButton()
-    {
-        
-        InitialiseInventoryItemList();
-
-        
-        string searchText = searchBar.GetComponent<TMP_InputField>().text;
-        int searchLength = searchText.Length;
-
-        int searchedItems = 0;
-
-        IList list = inventoryItemList;
-        for (int i1 = 0; i1 < list.Count; i1++)
-        {
-            GameObject i = (GameObject)list[i1];
-            searchedItems += 1;
-
-            if (i.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text.Length >= searchLength)
-            {
-                if (searchText.ToLower() == i.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text.Substring(0, searchLength).ToLower())
-                {
-                    i.SetActive(true);
-                }
-                else
-                {
-                    i.SetActive(false);
-                }
-            }
-        }
-        
-
-    }
-
-    public void BinButton()
-    {
-
-    }
-
-    /*
-    public static int Linear(int[] inventory, int value)
+    //******** linear search ********
+    public static int LinearSearch(int[] inventory, int value)
     {
 
         for (int i = 0; i < inventory.Length; i++)
@@ -410,7 +377,90 @@ public class ItemManagementSystem : MonoBehaviour
 
         return -1;
     }
-    */
+
+    public void LinButton()
+    {
+
+        LinearSearch();
+
+        InitialiseInventoryItemList();
+
+    }
+
+    //somehow fix later
+    private void LinearSearch()
+    {
+        throw new NotImplementedException();
+    }
+
+    //******** binary search ********
+    
+    public int BinarySearch(List<Item> items)
+    {
+        var start = 0;
+        var end = items.Count - 1;
+        var middle = (end - start) / 2;
+
+        var x;
+        while (items[middle] != x && start < end)
+        {
+            if (x < items[middle])
+            {
+                end = middle - 1;
+            }
+            else
+            {
+                start = middle + 1;
+            }
+        }
+        return (items[middle] != x) ? -1 : middle;
+    }
+    public void BinButton()
+    {
+
+        BinarySearch();
+
+        InitialiseInventoryItemList();
+
+    }
+
+    //somehow fix later
+    private void BinarySearch()
+    {
+        throw new NotImplementedException();
+    }
+
+
+    //*********************************
+    //******** random items ***********
+    //*********************************
+
+    List<Item> RandomItems(List<Item> inputList)
+    {
+        List<Item> outputList = new List<Item>();
+        int count = inputList.Count;
+
+        for (int i = 0; i < count; i++)
+        {
+            var index = UnityEngine.Random.Range(0, inputList.Count);
+            outputList.Add(inputList[index]);
+        }
+        return outputList;
+
+    }
+
+    public void RandomButton()
+    {
+
+        inventoryItemList = RandomItems(inventoryItemList);
+
+        InitialiseInventoryItemList();
+
+    }
+
+    //*********************************
+    //******** clear inventory ********
+    //*********************************
 
     void ClearInventoryItemList()
     {
