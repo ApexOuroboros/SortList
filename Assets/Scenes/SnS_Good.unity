@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1601,7 +1601,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1744832635}
   m_HandleRect: {fileID: 1744832634}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1897,7 +1897,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1900187770}
         m_TargetAssemblyTypeName: ItemManagementSystem, Assembly-CSharp
-        m_MethodName: SortBubWeightButton
+        m_MethodName: SortMergWeightButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2234,7 +2234,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1900187770}
         m_TargetAssemblyTypeName: ItemManagementSystem, Assembly-CSharp
-        m_MethodName: SortBubNameButton
+        m_MethodName: SortMergNameButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2414,7 +2414,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 970330214}
   m_HandleRect: {fileID: 970330213}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
