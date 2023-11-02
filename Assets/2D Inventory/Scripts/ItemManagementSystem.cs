@@ -23,15 +23,6 @@ public class ItemManagementSystem : MonoBehaviour
     Transform inventoryTransform;
 
     public TMP_InputField searchBar;
-    //public Button searchButton;
-
-    /*
-    public GameObject searchBar;
-    public GameObject[] itemList;
-    public GameObject inventory;
-
-    public int itemTotal;
-    */
 
     // Start is called before the first frame update
     void Start()
@@ -336,8 +327,9 @@ public class ItemManagementSystem : MonoBehaviour
 
     public void SortMergNameButton()
     {
-
+        Debug.Log("start: " + Time.time * 1000);
         inventoryItemList = SortName(inventoryItemList);
+        Debug.Log("end: " + Time.time * 1000);
 
         InitialiseInventoryItemList();
 
@@ -351,7 +343,7 @@ public class ItemManagementSystem : MonoBehaviour
 
     //******** linear search ********
 
-    // linear search does not work
+    // linear search works
 
     public static bool LinearSearch(List<Item> inventory, string value)
     {
@@ -385,8 +377,10 @@ public class ItemManagementSystem : MonoBehaviour
 
     // binary search does not work
 
-    public static string BinarySearch(List<Item> items, string target)
+    public static bool BinarySearch(List<Item> items, string target)
     {
+
+        Debug.Log("Binary Search on : " + target);
 
         var left = 0;
         var right = items.Count - 1;
@@ -397,7 +391,8 @@ public class ItemManagementSystem : MonoBehaviour
 
             if(string.Compare(items[mid].Name, target) == 0)
             {
-                return Convert.ToString(mid);
+                Debug.Log("Binary Search returns : true");
+                return true;
             }
             else if (string.Compare(items[mid].Name, target) < 0)
             {
@@ -409,8 +404,8 @@ public class ItemManagementSystem : MonoBehaviour
             }
 
         }
-
-        return Convert.ToString(-1);
+        Debug.Log("Binary Search returns : false");
+        return false;
     }
  
     public void BinButton()
