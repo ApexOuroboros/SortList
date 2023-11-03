@@ -272,8 +272,6 @@ public class ItemManagementSystem : MonoBehaviour
         right = SortName(right);
 
         return MergeName(left, right);
-
-        //string.Compare(left[0].Name, left[0 + 1].Name) > 0
     }
 
     public List<Item> MergeName(List<Item> left, List<Item> right)
@@ -285,7 +283,7 @@ public class ItemManagementSystem : MonoBehaviour
         while (leftItems < left.Count && rightItems < right.Count)
         {
 
-            if (string.Compare(left[leftItems].Name, left[leftItems + 1].Name) > 0)
+            if (string.Compare(left[leftItems].Name, left[leftItems].Name) > 0)
             {
 
                 result.Add(left[leftItems]);
