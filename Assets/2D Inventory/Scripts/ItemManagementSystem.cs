@@ -264,58 +264,54 @@ public class ItemManagementSystem : MonoBehaviour
             return unsorted;
         }
 
-        var left = new List<Item>();
-        var right = new List<Item>();
         var middle = unsorted.Count / 2;
-
-        for (var i = 0; i < middle; i++)
-        {
-            left.Add(unsorted[i]);
-        }
-
-        for (var i = 0; i < unsorted.Count; i++)
-        {
-            right.Add(unsorted[i]);
-        }
+        var left = unsorted.GetRange(0, middle);
+        var right = unsorted.GetRange(middle, unsorted.Count - middle);
 
         left = SortName(left);
         right = SortName(right);
 
         return MergeName(left, right);
+
+        //string.Compare(left[0].Name, left[0 + 1].Name) > 0
     }
 
     public List<Item> MergeName(List<Item> left, List<Item> right)
     {
         var result = new List<Item>();
+        int leftItems = 0;
+        int rightItems = 0;
 
-        while (left.Count > 0 || right.Count > 0)
+        while (leftItems < left.Count && rightItems < right.Count)
         {
 
-            if (left.Count > 0 && right.Count > 0)
+            if (string.Compare(left[leftItems].Name, left[leftItems + 1].Name) > 0)
             {
 
-                if (string.Compare(left[0].Name, left[0 + 1].Name) > 0)
-                {
-                    result.Add(left[0]);
-                    left.Remove(left[0]);
-                }
-                else
-                {
-                    result.Add(right[0]);
-                    right.Remove(right[0]);
-                }
+                result.Add(left[leftItems]);
+                leftItems++;
+
             }
-            else if (left.Count > 0)
+            else
             {
-                result.Add(left[0]);
-                result.Remove(left[0]);
+                result.Add(right[rightItems]);
+                rightItems++;
             }
-            else if (right.Count > 0)
-            {
-                result.Add(right[0]);
-                result.Remove(right[0]);
-            }
+
         }
+
+        while (leftItems < left.Count)
+        {
+            result.Add(left[leftItems]);
+            leftItems++;
+        }
+
+        while (rightItems < right.Count)
+        {
+            result.Add(right[rightItems]);
+            rightItems++;
+        }
+
         return result;
     }
 
