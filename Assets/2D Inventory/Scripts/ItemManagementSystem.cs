@@ -181,7 +181,7 @@ public class ItemManagementSystem : MonoBehaviour
 
     //******** merge sort ********
 
-    // merge sort does not work
+    // merge sort works
 
     //******** merge weight ********
     List<Item> SortWeight(List<Item> unsorted)
@@ -283,7 +283,7 @@ public class ItemManagementSystem : MonoBehaviour
         while (leftItems < left.Count && rightItems < right.Count)
         {
 
-            if (string.Compare(left[leftItems].Name, left[leftItems].Name) > 0)
+            if (string.Compare(left[leftItems].Name, right[rightItems].Name) > 0)
             {
 
                 result.Add(left[leftItems]);
@@ -376,11 +376,12 @@ public class ItemManagementSystem : MonoBehaviour
 
         while(left <= right)
         {
-            var mid = (left + right) / 2;
+            var mid =  left + (left + right) / 2;
 
             if(string.Compare(items[mid].Name, target) == 0)
             {
                 Debug.Log("Binary Search returns : true");
+                
                 return true;
             }
             else if (string.Compare(items[mid].Name, target) < 0)
@@ -396,11 +397,21 @@ public class ItemManagementSystem : MonoBehaviour
         Debug.Log("Binary Search returns : false");
         return false;
     }
+
+    //making sure the list is sorted before the code runs
+    public void SortListByName()
+    {
+        inventoryItemList.Sort((x, y) => string.Compare(x.Name, y.Name));
+    }
  
     public void BinButton()
     {
 
+        SortListByName();
+
+        Debug.Log("start: " + Time.time * 1000);
         BinarySearch(inventoryItemList, searchBar.text);
+        Debug.Log("end: " + Time.time * 1000);
 
         InitialiseInventoryItemList();
 
