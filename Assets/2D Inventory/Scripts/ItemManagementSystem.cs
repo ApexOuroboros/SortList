@@ -192,19 +192,9 @@ public class ItemManagementSystem : MonoBehaviour
             return unsorted;
         }
 
-        var left = new List<Item>();
-        var right = new List<Item>();
         var middle = unsorted.Count / 2;
-
-        for (var i = 0; i < middle; i++)
-        {
-            left.Add(unsorted[i]);
-        }
-
-        for (var i = 0; i < unsorted.Count; i++)
-        {
-            right.Add(unsorted[i]);
-        }
+        var left = unsorted.GetRange(0, middle);
+        var right = unsorted.GetRange(middle, unsorted.Count - middle);
 
         left = SortWeight(left);
         right = SortWeight(right);
