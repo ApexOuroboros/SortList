@@ -217,35 +217,39 @@ public class ItemManagementSystem : MonoBehaviour
     {
 
         var result = new List<Item>();
+        int leftItems = 0;
+        int rightItems = 0;
 
-        while (left.Count > 0 || right.Count > 0)
+        while (leftItems < left.Count && rightItems < right.Count)
         {
 
-            if (left.Count > 0 && right.Count > 0)
+            if (left[leftItems].Weight < right[rightItems].Weight)
             {
 
-                if (left[0].Weight < right[0].Weight)
-                {
-                    result.Add(left[0]);
-                    left.Remove(left[0]);
-                }
-                else
-                {
-                    result.Add(right[0]);
-                    right.Remove(right[0]);
-                }
+                result.Add(left[leftItems]);
+                leftItems++;
+
             }
-            else if (left.Count > 0)
+            else
             {
-                result.Add(left[0]);
-                result.Remove(left[0]);
+                result.Add(right[rightItems]);
+                rightItems++;
             }
-            else if (right.Count > 0)
-            {
-                result.Add(right[0]);
-                result.Remove(right[0]);
-            }
+            
         }
+
+        while(leftItems < left.Count)
+        {
+            result.Add(left[leftItems]);
+            leftItems++;
+        }
+
+        while(rightItems < right.Count)
+        {
+            result.Add(right[rightItems]);
+            rightItems++;
+        }
+
         return result;
         
     }
@@ -366,8 +370,9 @@ public class ItemManagementSystem : MonoBehaviour
 
     public void LinButton()
     {
-
+        Debug.Log("start: " + Time.time * 1000);
         LinearSearch(inventoryItemList, searchBar.text);
+        Debug.Log("end: " + Time.time * 1000);
 
         InitialiseInventoryItemList();
 
@@ -422,39 +427,16 @@ public class ItemManagementSystem : MonoBehaviour
     //******** random items ***********
     //*********************************
 
-    // random button not checked
-
-    /*
-    List<Item> RandomItems(List<Item> inputList)
-    {
-        List<Item> outputList = new List<Item>();
-        int count = inputList.Count;
-
-        for (int i = 0; i < count; i++)
-        {
-            var index = UnityEngine.Random.Range(0, inputList.Count);
-            outputList.Add(inputList[index]);
-        }
-        return outputList;
-
-    }
-    */
-
     public void RandomButton()
     {
-        /*
-        Item rand;
-
-        Random random = new Random();
-
-        for (int i = 0; i < fullItemList.Count; i++)
+        for(int i = 0; i < 100; i++)
         {
 
-            int randItems = random.Next(0, 1000);
-            inventoryItemList.Add(randItems);
+            System.Random random = new System.Random();
+            int randomItems = random.Next(0, fullItemList.Count);
+            inventoryItemList.Add(fullItemList[randomItems]);
 
         }
-        */
 
         InitialiseInventoryItemList();
 
