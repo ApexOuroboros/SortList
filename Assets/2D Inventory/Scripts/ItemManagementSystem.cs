@@ -366,7 +366,7 @@ public class ItemManagementSystem : MonoBehaviour
 
     // binary search does not work
 
-    public static bool BinarySearch(List<Item> items, string target)
+    public void BinarySearch(List<Item> items, string target)
     {
 
         Debug.Log("Binary Search on : " + target);
@@ -381,8 +381,8 @@ public class ItemManagementSystem : MonoBehaviour
             if(string.Compare(items[mid].Name, target) == 0)
             {
                 Debug.Log("Binary Search returns : true");
-                
-                return true;
+
+                inventoryItemList.Remove(items[mid]);
             }
             else if (string.Compare(items[mid].Name, target) < 0)
             {
@@ -395,7 +395,7 @@ public class ItemManagementSystem : MonoBehaviour
 
         }
         Debug.Log("Binary Search returns : false");
-        return false;
+        InitialiseInventoryItemList();
     }
 
     //making sure the list is sorted before the code runs
