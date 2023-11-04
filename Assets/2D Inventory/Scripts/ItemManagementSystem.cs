@@ -7,6 +7,7 @@ using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
+using static UnityEngine.GraphicsBuffer;
 
 public class ItemManagementSystem : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class ItemManagementSystem : MonoBehaviour
     Transform inventoryTransform;
 
     public TMP_InputField searchBar;
+    private float tempWeight;
+
 
     // Start is called before the first frame update
     void Start()
@@ -366,6 +369,51 @@ public class ItemManagementSystem : MonoBehaviour
 
     // binary search does not work
 
+
+    public void BinarySearch(List<Item> inventory, string name, float weight)
+    {
+        Debug.Log("Binary Search on : " + name);
+
+        Item items = new Item(name, weight);
+        int left = 0;
+        int right = inventory.Count - 1;
+
+        while (left <= right)
+        {
+
+            int mid = (left + right) / 2;
+            int compare = string.Compare(inventory[mid].Name, items.Name);
+
+            if (inventory[mid].Name == items.Name)
+            {
+
+                Debug.Log("Binary Search returns : true");
+                inventoryItemList.Remove(inventory[mid]);
+
+            }
+            else if (compare > 0)
+            {
+                right = mid - 1;
+            }
+            else
+            {
+                left = mid + 1;
+            }
+
+        }
+        InitialiseInventoryItemList();
+
+    }
+
+    public void BinButton2()
+    {
+        Debug.Log("start: " + Time.time * 1000);
+        BinarySearch(inventoryItemList, searchBar.text, tempWeight);
+        Debug.Log("end: " + Time.time * 1000);
+    }
+
+
+    /*
     public void BinarySearch(List<Item> items, string target)
     {
 
@@ -416,7 +464,7 @@ public class ItemManagementSystem : MonoBehaviour
         InitialiseInventoryItemList();
 
     }
-
+    */
 
     //*********************************
     //******** random items ***********
